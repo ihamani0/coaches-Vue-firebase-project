@@ -1,14 +1,16 @@
 export default {
     async setRequest(context , payload){
-        let coacheId = payload.coacheId;
+        let coachId = context.rootGetters.coachId;
+        let token = context.rootGetters.token;
+
         const request = {
             email : payload.email,
             message : payload.msg,
-            coacheId : coacheId
+            coacheId : coachId
         }
 
         const response = await fetch(`
-            https://vue-project-coachs-default-rtdb.europe-west1.firebasedatabase.app/requests/${coacheId}.json
+            https://vue-project-coachs-default-rtdb.europe-west1.firebasedatabase.app/requests/${coachId}.json
             ` , {
                 method : "POST" , 
                 body : JSON.stringify(request)
@@ -23,7 +25,10 @@ export default {
     } ,
 
     async loadRequest(context){
-        const response = await fetch(`https://vue-project-coachs-default-rtdb.europe-west1.firebasedatabase.app/requests.json`)
+        let coachId = context.rootGetters.coachId;
+        let token = context.rootGetters.token;
+
+        const response = await fetch(`https://vue-project-coachs-default-rtdb.europe-west1.firebasedatabase.app/requests.json?auth=${token}`)
 
         const  responsData = await response.json();    
 

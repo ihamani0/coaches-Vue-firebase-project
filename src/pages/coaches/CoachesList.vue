@@ -17,8 +17,11 @@
                 <base-button @click="loadCoachs(true)">
                     Refrshe
                 </base-button>
-                <base-button v-if="!isLoading" link to="/register" mode="outline">
+                <base-button v-if="CheckIfIsAuth &&  !isLoading" link to="/register" mode="outline">
                     Register Coache
+                </base-button>
+                <base-button v-else link to="/login?red=register" >
+                    Login
                 </base-button>
             </div>
 
@@ -77,6 +80,10 @@ export default {
         }
     } ,
     computed : {
+        CheckIfIsAuth(){
+            
+            return this.$store.getters.isAuth
+        },
         Allcoaches(){
             let coaches =  this.$store.getters['coaches/getCoaches'];
             return coaches.filter( coach => {

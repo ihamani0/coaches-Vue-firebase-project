@@ -6,11 +6,9 @@
                     {{ error.message }}
                 </p>
         </base-dialog>
-
         <base-dialog :show="isLoading" title="Auth..." fixed>
                 <base-spinner></base-spinner>
         </base-dialog>
-
         <base-card>
             <form @submit.prevent="submitForm"  class="flex flex-col justify-center space-y-6">
                 <div class="form-control">
@@ -25,8 +23,8 @@
                     <p class="text-red-500 text-xs font bold px-1 py-2 border-l-2 my-3 border-l-red-400" v-if="!FormIsValid">
                         Please ensure the input field
                     </p>
-                    <base-button  class="px-6 py-2 text-white  bg-slate-700 hover:bg-orange-500 rounded-full">login</base-button>
-                    <base-button link to="singup"  class="px-4 py-1 text-black" type="button" >Singup</base-button>
+                    <base-button  class="px-6 py-2 text-white  bg-slate-700 hover:bg-orange-500 rounded-full">Singup</base-button>
+                    <base-button link to="login"  class="px-4 py-1 text-black" type="button" >login</base-button>
                 </div>
             </form>
         </base-card>
@@ -52,10 +50,10 @@ export default {
             //send http request
             this.isLoading = true;
             try {
-                await this.$store.dispatch("login" , {
+                await this.$store.dispatch("singup" , {
                 email:this.email,
-                password : this.password ,
-                mode : "login"
+                password : this.password,
+                mode:'singup'
             })
             } catch (error) {
                 this.error.is = true;
@@ -64,10 +62,7 @@ export default {
             }
             this.isLoading = false;
 
-            let url = this.$route.query.red ?? "coaches";
-
-            this.$router.replace("/"+url)
-
+            
         } ,
         validation(){
             this.FormIsValid = true ;
@@ -78,7 +73,7 @@ export default {
                 this.FormIsValid = false ; 
                 return;
             }
-        },
+        } ,
         handleError(){
             this.error.is=false;
             this.message="";

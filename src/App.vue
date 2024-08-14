@@ -11,6 +11,14 @@ import TheHeader from "./components/layout/TheHeader.vue"
 export default {
     components : {
         TheHeader
+    },
+    created(){
+        this.$store.dispatch("keepAuthnticate", {
+            userId:localStorage.getItem('userId'),
+            token : localStorage.getItem('Token') , 
+            expiresToken: localStorage.getItem('ExpiresTime') ,  
+        })
+
     }
 }
 </script>
