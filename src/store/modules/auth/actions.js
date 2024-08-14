@@ -11,11 +11,11 @@ export default {
 
     async auth(context,payload){
 
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBymQBZqTTDk4vv4QS57xuribzDID4YGTY'
+        let url = '##'
         
         
         if(payload.mode === "singup"){
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBymQBZqTTDk4vv4QS57xuribzDID4YGTY';
+            url = '##';
         }
 
         const response = await fetch(url , {
